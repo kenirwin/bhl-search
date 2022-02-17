@@ -1,0 +1,49 @@
+<%- include('header.ejs', {
+  title: 'Home',
+  description: 'Welcome to the home page'
+}); %>
+
+<script>
+    $(document).ready(function() {
+        console.log('Jquery is ready');
+        $('#saveResultsForm input[type="submit"]').click(function(e) {
+            e.preventDefault();
+            let parts = [];
+            let items = [];
+            $('#saveResultsForm input[type="checkbox"]:checked').each(function() {
+                if ($(this).data('partid') !== undefined) {
+                    // console.log('PartID: ' + $(this).data('partid'));
+                    parts.push($(this).data('partid'));
+                } else if ($(this).data('itemid') !== undefined) {
+                    // console.log('ItemID: ' + $(this).data('itemid'));
+                    items.push($(this).data('itemid'));
+                }
+            });
+            console.log('Parts: ' + parts);
+            console.log('Items: ' + items);
+
+            $('#saveResultsForm input[name="parts"]').val(parts);
+            $('#saveResultsForm input[name="items"]').val(items);
+            $('#saveResultsForm').submit();
+        });
+    });
+</script>
+
+<%- include('partials/searchform.ejs') %>
+<hr>
+<% if (results) { %>
+    <form id="saveResultsForm" action="saveResults" method="POST">
+        <input type="submit" value="Save Marked Results">
+        <input type="hidden" name="parts" value="">
+        <input type="hidden" name="items" value="">
+    <% results.forEach(entry => { %>
+        <%- include('partials/entry.ejs', {
+            entry: entry
+        }); %>
+   <% }); %>
+   <input type="submit" value="Save Marked Results">
+    </form>
+<% } %>
+
+<%- include('footer.ejs');%>
+    

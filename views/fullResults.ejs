@@ -1,0 +1,21 @@
+<%- include('header.ejs', {
+  title: 'Home',
+  description: 'Welcome to the home page'
+}); %>
+
+<%- include('partials/searchform.ejs') %>
+<hr>
+<% if (results) { %>
+    <form id="saveResultsForm" action="saveResults" method="POST">
+        <input type="submit" value="Save Marked Results">
+    <% results.forEach(entry => { %>
+        <%- include('partials/fullEntry.ejs', {
+            entry: entry
+        }); %>
+   <% }); %>
+   <input type="submit" value="Save Marked Results">
+    </form>
+<% } %>
+
+<%- include('footer.ejs');%>
+    

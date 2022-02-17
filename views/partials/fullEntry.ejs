@@ -1,0 +1,16 @@
+<div class="card mt-3">
+    <div class="card-header">
+        <h3>         
+                <%- entry.Title %>
+        </h3>
+    </div>
+    <div class="card-body">
+        <p class="card-text">
+           <% for (var prop in entry) { %>
+            <%  if (Object.prototype.hasOwnProperty.call(entry, prop)) { %>
+                    <div class="line"><%- prop %>: <%- JSON.stringify (entry[prop])  %></div>
+                    <%  } %>
+                    <% } %>
+        </p>
+    </div>
+</div>
