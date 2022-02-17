@@ -15,7 +15,7 @@ app.use(express.urlencoded({ extended: true }));
 
 require('./routes')(app);
 
-const PORT = process.env.APP_PORT || '4000';
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, function () {
   console.log(
     `Localhost app listening on port ${PORT}! Go to http://localhost:${PORT}/`
