@@ -16,7 +16,13 @@
         <p class="card-text">
            <% for (var prop in entry) { %>
             <%  if (Object.prototype.hasOwnProperty.call(entry, prop)) { %>
-                    <div class="line"><%- prop %>: <%- JSON.stringify (entry[prop])  %></div>
+
+                <% if (typeof entry[prop] === 'String') { %>
+                    <% displayStr = entry[prop]; %>
+                <% } else { %> 
+                    <% displayStr = JSON.stringify (entry[prop]); %>
+                <% } %>
+                    <div class="line"><%- prop %>: <%- displayStr %>  %></div>
                     <%  } %>
                     <% } %>
         </p>

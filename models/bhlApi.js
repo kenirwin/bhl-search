@@ -17,13 +17,22 @@ module.exports = class BhlApi {
     };
     // console.log('preparing req', params);
     const response = await this.Query(params);
-    return response.data.Result;
+    if (response.status === 200) {
+      return response.data.Result;
+    }
   };
   getItemMetadata = async (itemId) => {
     let params = {
       op: 'ItemMetadata',
       itemid: itemId,
     };
+    const response = await this.Query(params);
+    if (response && response.data && response.data.Result) {
+      return response.data.Result;
+    } else {
+      console.log('no data');
+      return [];
+    }
   };
   getPartMetadata = async (partId) => {
     let params = {
@@ -37,7 +46,7 @@ module.exports = class BhlApi {
       return response.data.Result;
     } else {
       console.log('no data');
-      return false;
+      return [];
     }
   };
   Query = async (params) => {
@@ -48,7 +57,7 @@ module.exports = class BhlApi {
       return await axios.get(this.apiUrl, { params });
     } catch (error) {
       console.log(error);
-      return false;
+      return [];
     }
   };
 };

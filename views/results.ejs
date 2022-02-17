@@ -1,6 +1,5 @@
 <%- include('header.ejs', {
-  title: 'Home',
-  description: 'Welcome to the home page'
+  title: 'Search Results'
 }); %>
 
 <script>
@@ -36,6 +35,16 @@
 
 <%- include('partials/searchform.ejs') %>
 <hr>
+
+<% let thisMsg = (locals?.message) || ''; %>
+<% if (thisMsg.length > 0) { %>
+    <div class="alert alert-danger" role="alert">
+        <%= thisMsg %>
+    </div>
+    <%}%>
+
+
+
 <% if (results) { %>
     <form id="saveResultsForm" action="saveResults" method="POST">
         <input type="button" id="markAll" value="Mark All">

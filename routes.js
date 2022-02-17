@@ -12,7 +12,12 @@ module.exports = function (app) {
   app.post('/', async (req, res) => {
     const search = req.body.search;
     let kwResponse = await api.fulltextSearch(search);
-    res.render('results', { results: kwResponse });
+    let message = '';
+    if (kwResponse == undefined || kwResponse.length == 0) {
+      message = 'No results found for search: ' + search;
+    }
+
+    res.render('results', { results: kwResponse, message: message });
   });
   app.post('/saveResults', async (req, res) => {
     let metadata = [];
