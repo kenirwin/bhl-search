@@ -5,7 +5,12 @@
 
 <script>
     $(document).ready(function() {
-        console.log('Jquery is ready');
+        $('#markAll').click(function() {
+            $('input[name="ids"]').prop('checked', true);
+        });
+        $('#unmarkAll').click(function() {
+            $('input[name="ids"]').prop('checked', false);
+        });
         $('#saveResultsForm input[type="submit"]').click(function(e) {
             e.preventDefault();
             let parts = [];
@@ -33,6 +38,8 @@
 <hr>
 <% if (results) { %>
     <form id="saveResultsForm" action="saveResults" method="POST">
+        <input type="button" id="markAll" value="Mark All">
+        <input type="button" id="unmarkAll" value="Unmark All">
         <input type="submit" value="Save Marked Results">
         <input type="hidden" name="parts" value="">
         <input type="hidden" name="items" value="">
