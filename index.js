@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
-const config = require('config');
+require('dotenv').config();
 
 var app = express();
 
@@ -15,7 +15,7 @@ app.use(express.urlencoded({ extended: true }));
 
 require('./routes')(app);
 
-const PORT = config.get('app.port') || '4000';
+const PORT = process.env.APP_PORT || '4000';
 app.listen(PORT, function () {
   console.log(
     `Localhost app listening on port ${PORT}! Go to http://localhost:${PORT}/`

@@ -1,10 +1,10 @@
-const config = require('config');
 const axios = require('axios');
+require('dotenv').config();
 
 module.exports = class BhlApi {
   constructor() {
-    this.apiKey = config.get('bhlApi.apiKey');
-    this.apiUrl = config.get('bhlApi.apiUrl');
+    this.apiKey = process.env.BHL_API_KEY;
+    this.apiUrl = process.env.BHL_API_URL;
   }
 
   fulltextSearch = async (keywords) => {
